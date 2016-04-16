@@ -480,7 +480,7 @@ public class UpgradeMethods {
      * @return - the items that fit this criteria
      */
     public static ArrayList<ItemStack> getAdvFilterBasicItems(ItemStack[] itemStacks, byte[] buttonStates){
-        ArrayList<ItemStack> returnArray = new ArrayList<>();
+        ArrayList<ItemStack> returnArray = new ArrayList<ItemStack>();
         for (int i = 0; i < itemStacks.length; i++){
             if (itemStacks[i] != null){
                 if (buttonStates[i] == (byte) GuiButtonRegistry.getButton(ButtonNames.EXACT).getId()){
@@ -498,7 +498,7 @@ public class UpgradeMethods {
      * @return - the items that fit this criteria
      */
     public static ArrayList<ItemStack> getAdvFilterFuzzyItems(ItemStack[] itemStacks, byte[] buttonStates){
-        ArrayList<ItemStack> returnArray = new ArrayList<>();
+        ArrayList<ItemStack> returnArray = new ArrayList<ItemStack>();
         for (int i = 0; i < itemStacks.length; i++){
             if (itemStacks[i] != null){
                 if (buttonStates[i] == (byte)GuiButtonRegistry.getButton(ButtonNames.FUZZY).getId()){
@@ -516,7 +516,7 @@ public class UpgradeMethods {
      * @return - the items that fit this criteria
      */
     public static ArrayList<ItemStack> getAdvFilterModSpecificItems(ItemStack[] itemStacks, byte[] buttonStates){
-        ArrayList<ItemStack> returnArray = new ArrayList<>();
+        ArrayList<ItemStack> returnArray = new ArrayList<ItemStack>();
         for (int i = 0; i < itemStacks.length; i++){
             if (itemStacks[i] != null){
                 if (buttonStates[i] == (byte)GuiButtonRegistry.getButton(ButtonNames.MOD_SPECIFIC).getId()){
@@ -534,7 +534,7 @@ public class UpgradeMethods {
      * @return - the items that fit this criteria
      */
     public static ArrayList<ItemStack> getAdvFilterOreDictItems(ItemStack[] itemStacks, byte[] buttonStates){
-        ArrayList<ItemStack> returnArray = new ArrayList<>();
+        ArrayList<ItemStack> returnArray = new ArrayList<ItemStack>();
         for (int i = 0; i < itemStacks.length; i++){
             if (itemStacks[i] != null){
                 if (buttonStates[i] == (byte)GuiButtonRegistry.getButton(ButtonNames.ORE_DICT).getId()){
@@ -552,7 +552,7 @@ public class UpgradeMethods {
      * @return - the items that fit this criteria
      */
     public static ArrayList<ItemStack> getAdvFilterVoidItems(ItemStack[] itemStacks, byte[] buttonStates){
-        ArrayList<ItemStack> returnArray = new ArrayList<>();
+        ArrayList<ItemStack> returnArray = new ArrayList<ItemStack>();
         for (int i = 0; i < itemStacks.length; i++){
             if (itemStacks[i] != null){
                 if (buttonStates[i] == (byte)GuiButtonRegistry.getButton(ButtonNames.VOID).getId()){
