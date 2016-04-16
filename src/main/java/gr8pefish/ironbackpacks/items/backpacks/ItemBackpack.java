@@ -18,7 +18,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -59,21 +62,21 @@ public class ItemBackpack extends ItemIUpgradableITieredBackpack {
     //returning true will stop the alt. gui from opening
     //returning false will let it continue as normal (i.e. it can open)
     @Override
-    public boolean onItemUseFirst(ItemStack itemstack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUseFirst(ItemStack itemstack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand) {
         if (!world.isRemote) { //server side
             if (!(player.isSneaking())) { //only do it when player is sneaking
-                return false;
+                return EnumActionResult.FAIL;
             }
             ArrayList<ItemStack> upgrades = IronBackpacksHelper.getUpgradesAppliedFromNBT(itemstack);
             boolean hasDepthUpgrade = UpgradeMethods.hasDepthUpgrade(upgrades);
             if (UpgradeMethods.hasQuickDepositUpgrade(upgrades)) {
                 openAltGui = !UpgradeMethods.transferFromBackpackToInventory(player, itemstack, world, pos, false);
                 if (!hasDepthUpgrade)
-                    return !openAltGui;
+                    return !openAltGui ? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
             }else if (UpgradeMethods.hasQuickDepositPreciseUpgrade(upgrades)) {
                 openAltGui = !UpgradeMethods.transferFromBackpackToInventory(player, itemstack, world, pos, true);
                 if (!hasDepthUpgrade)
-                    return !openAltGui;
+                    return !openAltGui ? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
             }
             boolean openAltGuiDepth;
             if (hasDepthUpgrade) {
@@ -91,33 +94,33 @@ public class ItemBackpack extends ItemIUpgradableITieredBackpack {
                         }
                     }
                 }
-                return !openAltGui;
+                return !openAltGui ? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
             }
         }
-        return false;
+        return EnumActionResult.FAIL;
     }
 
     //to open the guis
     @Override
-    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
+    public ActionResult<ItemStack> onItemRightClick(ItemStack itemStack, World world, EntityPlayer player, EnumHand hand) {
         if (world.isRemote){ //client side
             NBTUtils.setUUID(itemStack);
             PlayerBackpackProperties.setCurrentBackpack(player, itemStack); //need to update on client side so has access to backpack for GUI's backpack stack's display name //TODO: client side
-            return itemStack;
+            return ActionResult.newResult(EnumActionResult.SUCCESS, itemStack);
         } else {
             NBTUtils.setUUID(itemStack);
             PlayerBackpackProperties.setCurrentBackpack(player, itemStack);
             if (!(player.isSneaking())){
                 int guiId = ItemIBackpackRegistry.getIndexOf((IBackpack)itemStack.getItem());
                 player.openGui(IronBackpacks.instance, guiId, world, (int) player.posX, (int) player.posY, (int) player.posZ); //"Normal usage"
-                return itemStack;
+                return ActionResult.newResult(EnumActionResult.SUCCESS, itemStack);
             } else { //if sneaking
                 if (openAltGui) {
                     int guiId = ItemIBackpackRegistry.getIndexOf((IBackpack) itemStack.getItem());
                     player.openGui(IronBackpacks.instance, (guiId * -1) - 1, world, (int) player.posX, (int) player.posY, (int) player.posZ);
                 } else
                     openAltGui = true;
-                return itemStack;
+                return ActionResult.newResult(EnumActionResult.SUCCESS, itemStack);
             }
         }
     }

@@ -8,24 +8,18 @@ import gr8pefish.ironbackpacks.integration.jei.increaseTier.IncreaseTierRecipeHa
 import gr8pefish.ironbackpacks.integration.jei.removeUpgrade.RemoveUpgradeRecipeCategory;
 import gr8pefish.ironbackpacks.integration.jei.removeUpgrade.RemoveUpgradeRecipeHandler;
 import gr8pefish.ironbackpacks.registry.ItemRegistry;
+import mezz.jei.JeiHelpers;
 import mezz.jei.api.*;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nonnull;
+
 @mezz.jei.api.JEIPlugin
-public class JEIPlugin implements IModPlugin {
-
-    public static IJeiHelpers jeiHelpers;
-
-    @Override
-    public void onJeiHelpersAvailable(IJeiHelpers jeiHelpers) {
-        JEIPlugin.jeiHelpers = jeiHelpers;
-    }
-
-    @Override
-    public void onItemRegistryAvailable(IItemRegistry itemRegistry) {}
+public class JEIPlugin extends BlankModPlugin {
 
     @Override
     public void register(IModRegistry registry) {
+        IJeiHelpers jeiHelpers = registry.getJeiHelpers();
         registry.addRecipeCategories(
                 new AddUpgradeRecipeCategory(jeiHelpers.getGuiHelper()),
                 new RemoveUpgradeRecipeCategory(jeiHelpers.getGuiHelper()),
@@ -73,9 +67,4 @@ public class JEIPlugin implements IModPlugin {
         registry.addDescription(new ItemStack(ItemRegistry.upgradeItem, 1, ItemIUpgradeRegistry.getIndexOfIConfigurableUpgrade(ItemRegistry.restockingUpgrade)), "jei.description.upgrade.restocking", "jei.description.upgrade.configurable");
 
     }
-
-    @Override
-    public void onRecipeRegistryAvailable(IRecipeRegistry recipeRegistry) {}
-
-
 }

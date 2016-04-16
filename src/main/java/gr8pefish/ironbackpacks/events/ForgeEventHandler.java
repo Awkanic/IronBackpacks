@@ -21,7 +21,7 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -49,7 +49,7 @@ public class ForgeEventHandler {
         if (event.isCanceled())
             return; //ends the event
         else{
-            ArrayList<ArrayList<ItemStack>> backpacks = getFilterCrafterAndRestockerBackpacks(event.entityPlayer);
+            ArrayList<ArrayList<ItemStack>> backpacks = getFilterCrafterAndRestockerBackpacks(event.getEntityPlayer());
             boolean doFilter = checkRestockingUpgradeItemPickup(event, backpacks.get(4)); //doFilter is false if the itemEntity is in the restockerUpgrade's slots and the itemEntity's stackSize < refillSize
             if (doFilter) {
                 checkFilterUpgrade(event, backpacks.get(0)); //beware creative testing takes the itemstack still
@@ -82,8 +82,8 @@ public class ForgeEventHandler {
      */
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onDeath(LivingDeathEvent event){
-        if (!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer){ //server side
-            IronBackpacksHelper.saveBackpackOnDeath((EntityPlayer) event.entity);
+        if (!event.getEntity().worldObj.isRemote && event.getEntity() instanceof EntityPlayer){ //server side
+            IronBackpacksHelper.saveBackpackOnDeath((EntityPlayer) event.getEntity());
         }
     }
 
@@ -93,8 +93,8 @@ public class ForgeEventHandler {
      */
     @SubscribeEvent
     public void onEntityJoinWorld(EntityJoinWorldEvent event){
-        if (!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer){ //server side
-            IronBackpacksHelper.loadBackpackOnDeath((EntityPlayer) event.entity);
+        if (!event.getEntity().worldObj.isRemote && event.getEntity() instanceof EntityPlayer){ //server side
+            IronBackpacksHelper.loadBackpackOnDeath((EntityPlayer) event.getEntity());
         }
     }
 
@@ -104,11 +104,11 @@ public class ForgeEventHandler {
      */
     @SubscribeEvent
     public void onEntityConstruction(EntityEvent.EntityConstructing event) {
-        if (event.entity instanceof EntityPlayer) {
-            if(PlayerBackpackProperties.get((EntityPlayer) event.entity) == null)
-                PlayerBackpackProperties.create((EntityPlayer) event.entity);
-            if (PlayerBackpackDeathProperties.get((EntityPlayer) event.entity) == null)
-                PlayerBackpackDeathProperties.create((EntityPlayer) event.entity);
+        if (event.getEntity() instanceof EntityPlayer) {
+            if(PlayerBackpackProperties.get((EntityPlayer) event.getEntity()) == null)
+                PlayerBackpackProperties.create((EntityPlayer) event.getEntity());
+            if (PlayerBackpackDeathProperties.get((EntityPlayer) event.getEntity()) == null)
+                PlayerBackpackDeathProperties.create((EntityPlayer) event.getEntity());
         }
     }
 
@@ -138,8 +138,8 @@ public class ForgeEventHandler {
      */
     @SubscribeEvent
     public void onPlayerCloning(net.minecraftforge.event.entity.player.PlayerEvent.Clone event) {
-        PlayerBackpackDeathProperties epNew = PlayerBackpackDeathProperties.get(event.entityPlayer);
-        PlayerBackpackDeathProperties epOld = PlayerBackpackDeathProperties.get(event.original);
+        PlayerBackpackDeathProperties epNew = PlayerBackpackDeathProperties.get(event.getEntityPlayer());
+        PlayerBackpackDeathProperties epOld = PlayerBackpackDeathProperties.get(event.getOriginal());
 
         //update new dat with old
         epNew.setEternityBackpacks(epOld.getEternityBackpacks());

@@ -9,7 +9,7 @@ import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 
 import javax.annotation.Nonnull;
 
@@ -21,7 +21,7 @@ public class IncreaseTierRecipeCategory implements IRecipeCategory {
     private final ICraftingGridHelper craftingGridHelper;
 
     public IncreaseTierRecipeCategory(IGuiHelper guiHelper) {
-        title = StatCollector.translateToLocal("jei.ironbackpacks.increaseTierRecipe.name");
+        title = I18n.translateToLocal("jei.ironbackpacks.increaseTierRecipe.name");
         this.background = guiHelper.createDrawable(new ResourceLocation("ironbackpacks", "textures/jei/craftingGridRecipeJEI.png"), 0, 0, 166, 101);
         craftingGridHelper = guiHelper.createCraftingGridHelper(1, 0);
     }

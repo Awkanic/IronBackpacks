@@ -1,6 +1,6 @@
 package gr8pefish.ironbackpacks.util;
 
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.List;
 public class TextUtils {
 
     public static String localize(String input, Object ... format) {
-        return StatCollector.translateToLocalFormatted(input, format);
+        return I18n.translateToLocalFormatted(input, format);
     }
 
 //    public static String localizeColor

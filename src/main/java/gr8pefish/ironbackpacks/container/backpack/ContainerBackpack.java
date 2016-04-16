@@ -8,13 +8,15 @@ import gr8pefish.ironbackpacks.entity.extendedProperties.PlayerBackpackPropertie
 import gr8pefish.ironbackpacks.items.backpacks.ItemBackpack;
 import gr8pefish.ironbackpacks.items.upgrades.UpgradeMethods;
 import gr8pefish.ironbackpacks.util.helpers.IronBackpacksHelper;
-import invtweaks.api.container.ChestContainer;
+//import invtweaks.api.container.ChestContainer;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,7 +25,7 @@ import java.util.Comparator;
 /**
  * The container of the backpack when it is opened normally.
  */
-@ChestContainer //Inventory tweaks
+//@ChestContainer //Inventory tweaks
 public class ContainerBackpack extends Container {
 
     private EntityPlayer player; //the player
@@ -152,7 +154,7 @@ public class ContainerBackpack extends Container {
     }
 
     @Override
-    public ItemStack slotClick(int slot, int button, int flag, EntityPlayer player) {
+    public ItemStack slotClick(int slot, int button, ClickType clickType, EntityPlayer player) {
         // this will prevent the player from interacting with the items that opened the inventory:
         ItemStack currPack = PlayerBackpackProperties.getCurrentBackpack(player);
         if (slot >= 0 && getSlot(slot) != null && getSlot(slot).getHasStack() && ItemStack.areItemStacksEqual(getSlot(slot).getStack(), currPack) && button == 0) {
@@ -163,7 +165,7 @@ public class ContainerBackpack extends Container {
                 ItemStack stack = getSlot(slot).getStack();
 
                 if (!ItemStack.areItemStackTagsEqual(stack, IronBackpacksHelper.getBackpack(player))) //can't right click the same backpack you have open, causes it to not update correctly and dupe items
-                    stack.useItemRightClick(player.worldObj, player);
+                    stack.useItemRightClick(player.worldObj, player, EnumHand.MAIN_HAND);
                 return null;
 
                 //no EnderStorage yet in 1.8
@@ -173,11 +175,11 @@ public class ContainerBackpack extends Container {
 //                return null;
             }else if(getSlot(slot).getStack().getItem() instanceof IInventory) { //TODO: Dangerous inter-mod IInventory code, test this
                 ItemStack stack = getSlot(slot).getStack();
-                stack.useItemRightClick(player.worldObj, player);
+                stack.useItemRightClick(player.worldObj, player, EnumHand.MAIN_HAND);
                 return null;
             }
         }
-        return super.slotClick(slot, button, flag, player);
+        return super.slotClick(slot, button, clickType, player);
     }
 
     //======================================================================HELPER METHODS=========================================================================
@@ -236,12 +238,12 @@ public class ContainerBackpack extends Container {
         }
     }
 
-    @ChestContainer.RowSizeCallback //Inventory tweaks compatibility
+    //@ChestContainer.RowSizeCallback //Inventory tweaks compatibility
     public int getNumColumns(){
         return backpackItem.getRowLength(backpackStack);
     }
 
-    @ChestContainer.IsLargeCallback //Inventory tweaks compatibility
+    //@ChestContainer.IsLargeCallback //Inventory tweaks compatibility
     public boolean getVerticalButtons(){
         return false;
     }

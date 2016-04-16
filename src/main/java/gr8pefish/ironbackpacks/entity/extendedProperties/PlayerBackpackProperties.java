@@ -17,7 +17,6 @@ public class PlayerBackpackProperties implements IExtendedEntityProperties {
 
     @Override
     public void saveNBTData(NBTTagCompound tag) {
-
         //make new list
         NBTTagList tagList = new NBTTagList();
 

@@ -60,8 +60,8 @@ public class IronBackpacksHelper {
      */
     public static ItemStack getBackpackFromPlayersInventory(EntityPlayer player){
         ItemStack backpack = null;
-        if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof IBackpack) {
-            backpack = player.getHeldItem();
+        if (player.getHeldItemMainhand() != null && player.getHeldItemMainhand().getItem() instanceof IBackpack) {
+            backpack = player.getHeldItemMainhand();
         } else {
             for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
                 ItemStack stack = player.inventory.getStackInSlot(i);
@@ -87,7 +87,7 @@ public class IronBackpacksHelper {
      * @return - an int[] of the upgrades applied (only contains what is applied, no empty values)
      */
     public static ArrayList<ItemStack> getUpgradesAppliedFromNBT(ItemStack backpack) {
-        ArrayList<ItemStack> upgradesArrayList = new ArrayList<>();
+        ArrayList<ItemStack> upgradesArrayList = new ArrayList<ItemStack>();
         if (backpack != null) {
             NBTTagCompound nbtTagCompound = backpack.getTagCompound();
             if (nbtTagCompound != null) {
@@ -192,9 +192,9 @@ public class IronBackpacksHelper {
             }
 
         }
-        else if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof IBackpack) { //need to equip backpack
+        else if (player.getHeldItemMainhand() != null && player.getHeldItemMainhand().getItem() instanceof IBackpack) { //need to equip backpack
 
-            ItemStack backpackStack = player.getHeldItem();
+            ItemStack backpackStack = player.getHeldItemMainhand();
             NBTUtils.setUUID(backpackStack);
 
             //equip backpack from the backpack the player is holding
@@ -232,7 +232,7 @@ public class IronBackpacksHelper {
      * @param player - the player who died with the backpack
      */
     public static void saveBackpackOnDeath(EntityPlayer player) {
-        ArrayList<ItemStack> backpacks = new ArrayList<>(); //the backpacks to save
+        ArrayList<ItemStack> backpacks = new ArrayList<ItemStack>(); //the backpacks to save
 
         boolean shouldStorePack = false; //to store the pack in the inventory for a "normal death"
         boolean stored = false; //the act of storing it
