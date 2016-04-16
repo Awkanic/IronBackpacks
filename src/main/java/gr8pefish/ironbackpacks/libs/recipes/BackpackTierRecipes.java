@@ -26,7 +26,7 @@ public class BackpackTierRecipes {
             'i', "ingotIron", 'o', "blockIron", 'b', ItemRegistry.basicBackpack};
 
     public static List<Object[]> getBasicBackpackTierRecipes(){
-        ArrayList<Object[]> recipes = new ArrayList<>();
+        ArrayList<Object[]> recipes = new ArrayList<Object[]>();
         recipes.add(basicBackpackStorageEmphasisTierRecipe);
         recipes.add(basicBackpackUpgradeEmphasisTierRecipe);
         return recipes;

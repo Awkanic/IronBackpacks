@@ -123,7 +123,7 @@ public class PlayerBackpackDeathProperties implements IExtendedEntityProperties 
 
     public static void reset(EntityLivingBase livingBase) {
         get(livingBase).setEquippedBackpack(null);
-        get(livingBase).setEternityBackpacks(new ArrayList<>()); //empty list
+        get(livingBase).setEternityBackpacks(new ArrayList<ItemStack>()); //empty list
     }
 
 }

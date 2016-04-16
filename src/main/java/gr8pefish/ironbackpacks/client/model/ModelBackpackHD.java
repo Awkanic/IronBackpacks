@@ -14,7 +14,7 @@ public class ModelBackpackHD extends ModelBase {
         textureWidth = 32;
         textureHeight = 32;
 
-        parts = new ArrayList<>();
+        parts = new ArrayList<ModelRenderer>();
 
         ModelRenderer main = new ModelRenderer(this, 0, 0);
         main.addBox(-2, -3, -1, 4, 6, 2);

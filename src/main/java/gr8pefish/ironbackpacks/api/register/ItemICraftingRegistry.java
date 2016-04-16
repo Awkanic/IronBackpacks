@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ItemICraftingRegistry {
 
-    private static List<ItemICrafting> items = new ArrayList<>();
+    private static List<ItemICrafting> items = new ArrayList<ItemICrafting>();
 
     public static void registerItemCrafting(ItemICrafting item) {
         if (!items.contains(item))

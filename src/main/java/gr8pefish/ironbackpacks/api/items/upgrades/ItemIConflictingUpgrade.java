@@ -25,7 +25,7 @@ public class ItemIConflictingUpgrade implements IConflictingUpgrade {
         this.upgradeCost = upgradeCost;
         this.description = description;
         this.tier = tier;
-        this.conflictingUpgrades = new ArrayList<>();
+        this.conflictingUpgrades = new ArrayList<ItemIConflictingUpgrade>();
     }
 
     @Override

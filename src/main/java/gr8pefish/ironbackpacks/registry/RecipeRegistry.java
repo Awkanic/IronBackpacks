@@ -111,7 +111,7 @@ public class RecipeRegistry {
      * If the backpack is also an ITieredBackpack, then the tier of the upgrade must be lower than or equal to the backpack to allow it to be applied.
      */
     private static void registerBackpackUpgradeAdditionRecipes() {
-        ArrayList<ItemStack> upgrades = new ArrayList<>();
+        ArrayList<ItemStack> upgrades = new ArrayList<ItemStack>();
         for (int i = 0; i < ItemIUpgradeRegistry.getTotalSize(); i++)
             upgrades.add(new ItemStack(ItemRegistry.upgradeItem, 1, i));
 

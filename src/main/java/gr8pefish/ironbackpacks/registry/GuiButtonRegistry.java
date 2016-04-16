@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class GuiButtonRegistry {
 
-    private static Map<ButtonNames, IGuiButton> buttons = new HashMap<>();
+    private static Map<ButtonNames, IGuiButton> buttons = new HashMap<ButtonNames, IGuiButton>();
     private static IGuiButton[] advFilterButtons;
 
     /**

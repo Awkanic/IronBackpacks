@@ -21,7 +21,7 @@ public class EntityBackpack extends Entity implements IEntityAdditionalSpawnData
     private ItemStack backpackStack; //the backpack as an items stack
 
     //all the backpacks in one map
-    private static Map<ItemStack, EntityBackpack> backpacksSpawnedMap = new HashMap<>();
+    private static Map<ItemStack, EntityBackpack> backpacksSpawnedMap = new HashMap<ItemStack, EntityBackpack>();
 
     public EntityBackpack(World world){
         super(world);

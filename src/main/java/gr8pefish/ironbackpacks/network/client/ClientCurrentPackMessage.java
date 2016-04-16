@@ -35,13 +35,14 @@ public class ClientCurrentPackMessage implements IMessage {
     public static class Handler implements IMessageHandler<ClientCurrentPackMessage, IMessage> {
 
         @Override
-        public IMessage onMessage(ClientCurrentPackMessage message, MessageContext ctx) {
-
-            //have to use threading system since 1.8
-            Minecraft.getMinecraft().addScheduledTask(() -> {
-                EntityPlayer player = IronBackpacks.proxy.getClientPlayer();
-                if (player != null) {
-                    PlayerBackpackProperties.setCurrentBackpack(player, message.stack); //update the backpack
+        public IMessage onMessage(final ClientCurrentPackMessage message, MessageContext ctx) {
+            Minecraft.getMinecraft().addScheduledTask(new Runnable() {
+                @Override
+                public void run() {
+                  EntityPlayer player = IronBackpacks.proxy.getClientPlayer();
+                  if (player != null) {
+                      PlayerBackpackProperties.setCurrentBackpack(player, message.stack); //update the backpack
+                  }
                 }
             });
 

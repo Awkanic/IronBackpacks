@@ -53,8 +53,8 @@ public class ItemIUpgradableITieredBackpack extends Item implements IUpgradableB
         this.guiXSize = guiXSize;
         this.guiYSize = guiYSize;
 
-        this.backpacksAbove = new ArrayList<>(); //empty list
-        this.tierRecipes = new ArrayList<>(); //empty list
+        this.backpacksAbove = new ArrayList<ITieredBackpack>(); //empty list
+        this.tierRecipes = new ArrayList<Object[]>(); //empty list
 
         this.modelTexture = modelTexture;
     }

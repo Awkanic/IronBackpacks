@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ItemIBackpackRegistry {
 
-    private static List<IBackpack> backpacks = new ArrayList<>();
+    private static List<IBackpack> backpacks = new ArrayList<IBackpack>();
 
     public static void registerItemBackpack(IBackpack item) {
         if (!backpacks.contains(item))

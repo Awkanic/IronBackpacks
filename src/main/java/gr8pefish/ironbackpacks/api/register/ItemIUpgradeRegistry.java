@@ -20,9 +20,9 @@ import java.util.List;
 
 public class ItemIUpgradeRegistry {
 
-    private static List<ItemIUpgrade> upgradesIUpgrade = new ArrayList<>(); //the IUpgrade upgrades registered
-    private static List<ItemIConflictingUpgrade> upgradesIConflictingUpgrade = new ArrayList<>(); //the IConflictingUpgrades registered
-    private static List<ItemIConfigurableUpgrade> upgradesIConfigurableUpgrade = new ArrayList<>(); //the IConfigurableUpgrades registered
+    private static List<ItemIUpgrade> upgradesIUpgrade = new ArrayList<ItemIUpgrade>(); //the IUpgrade upgrades registered
+    private static List<ItemIConflictingUpgrade> upgradesIConflictingUpgrade = new ArrayList<ItemIConflictingUpgrade>(); //the IConflictingUpgrades registered
+    private static List<ItemIConfigurableUpgrade> upgradesIConfigurableUpgrade = new ArrayList<ItemIConfigurableUpgrade>(); //the IConfigurableUpgrades registered
 
     //=======================Register the items==============================
 
